@@ -1,29 +1,22 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts } from '../redux/contactsSlice';
-import ContactForm from './ContactForm';
-import ContactList from './ContactList';
-import SearchBox from './SearchBox';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import HomePage from '../pages/HomePage';
+import RegisterPage from '../pages/RegisterPage';
+import LoginPage from '../pages/LoginPage';
+import ContactsPage from '../pages/ContactsPage';
+import PrivateRoute from '../components/PrivateRoute';
 
 const App = () => {
-  const dispatch = useDispatch();
-  const { loading, error } = useSelector((state) => state.contacts);
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
   return (
-    <div className="app">
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <SearchBox />
-      {loading && <p>Loading contacts...</p>}
-      {error && <p>Error: {error}</p>}
-      <ContactList />
+    <div>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/contacts" element={<PrivateRoute><ContactsPage /></PrivateRoute>} />
+      </Routes>
     </div>
   );
 };
 
 export default App;
-

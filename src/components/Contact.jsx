@@ -14,7 +14,7 @@ const Contact = ({ contact, deleteContact }) => {
           </div>
           <div className="avatar">
             <img src={phoneIcon} alt="User Telephone" width="20" height="20" />
-            <div className="contact-number">{contact.phone}</div>
+            <div className="contact-number">{contact.number}</div>
           </div>
         </div>
         <button className="delete-button" onClick={() => deleteContact(contact.id)}>

@@ -6,7 +6,7 @@ import Contact from './Contact';
 const ContactList = () => {
   const dispatch = useDispatch();
   const contacts = useSelector((state) => state.contacts.items);
-  const filter = useSelector((state) => state.filters.name);
+  const filter = useSelector((state) => state.filters.name); 
 
   const filteredContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
@@ -14,13 +14,17 @@ const ContactList = () => {
 
   return (
     <div className="contact-list">
-      {filteredContacts.map((contact) => (
-        <Contact
-          key={contact.id}
-          contact={contact} 
-          deleteContact={() => dispatch(deleteContact(contact.id))} 
-        />
-      ))}
+      {filteredContacts.length > 0 ? (
+        filteredContacts.map((contact) => (
+          <Contact
+            key={contact.id}
+            contact={contact}
+            deleteContact={() => dispatch(deleteContact(contact.id))}
+          />
+        ))
+      ) : (
+        <p>No contacts available</p>
+      )}
     </div>
   );
 };
